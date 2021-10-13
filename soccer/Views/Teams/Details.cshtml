@@ -1,0 +1,33 @@
+﻿@model soccer.Data.Entities.Team
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4><strong>Detalles</strong></h4>
+
+<div>
+    <h6>Equipo</h6>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogoPath)
+        </dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.LogoPath))
+            {
+                <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class=" fas fa-pencil-alt"></i></a>
+    <a asp-action="Index" class="btn btn-success"><i class="fas fa-undo-alt"></i></a>
+</div>
