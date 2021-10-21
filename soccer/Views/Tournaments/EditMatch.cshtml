@@ -1,0 +1,36 @@
+﻿
+
+@model soccer.Models.MatchViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h5>Agregar Partido al Grupo: @Model.Group.Name</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMatch" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GroupId" />
+            <input type="hidden" asp-for="Id" />
+
+            <partial name="_Match" />
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                </button>
+                <a asp-action="DetailsGroup" asp-route-id="@Model.GroupId" class="btn btn-success"><i class=" fas fa-undo-alt"></i></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

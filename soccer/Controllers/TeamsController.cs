@@ -128,36 +128,39 @@ namespace soccer.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                
+                var path = string.Empty;
+
+                if (model.LogoFile != null)
                 {
-                    var path = model.LogoPath;
+                    path = await _imageHelper.UploadImageAsync(model.LogoFile, "Teams");
+                }
 
-                    if (model.LogoFile != null)
-                    {
-                        path = await _imageHelper.UploadImageAsync(model.LogoFile, "Teams");
-                    }
-
+                try
+                {
                     Team team = _converterHelper.ToTeam(model, path, false);
                     _context.Update(team);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
 
-                    try
+                }
+                catch (DbUpdateException dbUpdateException)
+                {
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                        ModelState.AddModelError(string.Empty, "Ya existe un equipo con ese nombre.");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        if (ex.InnerException.Message.Contains("duplicate"))
-                        {
-                            ModelState.AddModelError(string.Empty, "Ya existe un país con ese nombre.");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-                        }
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                     }
                 }
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
             }
+
             return View(model);
         }
 

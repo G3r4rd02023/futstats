@@ -15,7 +15,7 @@ namespace soccer.Data
         public DbSet<Group> Groups { get; set; }
 
         public DbSet<Match> Matches { get; set; }
-
+        public DbSet<Prediction> Predictions { get; set; }
         public DbSet<Team> Teams { get; set; }
 
         public DbSet<Tournament> Tournaments { get; set; }

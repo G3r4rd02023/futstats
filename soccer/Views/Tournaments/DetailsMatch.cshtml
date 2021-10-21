@@ -1,0 +1,73 @@
+﻿@model soccer.Data.Entities.Match
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Detalles Partido</h4>
+
+<h5>Partido en Grupo: @Model.Group.Name</h5>
+<hr />
+
+<div class="col-md-3">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayFor(model => model.Local.Name)
+        </dt>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.Local.LogoPath))
+            {
+                <img src="@Url.Content(Model.Local.LogoPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
+
+        </dd>
+    </dl>
+</div>
+
+<div class="col-md-3">
+
+
+    <dl class="dl-horizontal">
+        <dd>
+            <strong>@Html.DisplayFor(model => model.GoalsLocal)</strong>
+        </dd>
+    </dl>
+</div>
+
+<div class="col-md-3">
+
+    <dl class="dl-horizontal">
+        <dd>
+            <strong>@Html.DisplayFor(model => model.GoalsVisitor)</strong>
+        </dd>
+    </dl>
+</div>
+
+
+<div class="col-md-3">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayFor(model => model.Visitor.Name)
+        </dt>
+        <dd>
+
+            @if (!string.IsNullOrEmpty(Model.Visitor.LogoPath))
+            {
+                <img src="@Url.Content(Model.Visitor.LogoPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
+
+        </dd>
+    </dl>
+</div>
+
+<a asp-action="Index" class="btn btn-success"><i class=" fas fa-undo-alt"></i></a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+

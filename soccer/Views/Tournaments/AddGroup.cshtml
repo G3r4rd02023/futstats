@@ -1,0 +1,32 @@
+﻿
+@model soccer.Models.GroupViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h5><strong> Agregar</strong></h5>
+
+<h5><strong> Grupo al Torneo: @Model.Tournament.Name</strong></h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddGroup" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TournamentId" />
+
+            <partial name="_Group" />
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                </button>
+                <a asp-action="Details" asp-route-id="@Model.TournamentId" class="btn btn-success"><i class=" fas fa-undo-alt"></i></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -32,9 +32,10 @@ namespace soccer
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddTransient<SeedDb>();
-            services.AddScoped<IImageHelper, ImageHelper>();
+            services.AddScoped<IImageHelper, ImageHelper>();           
+            services.AddScoped<ICombosHelper, CombosHelper>();
             services.AddScoped<IConverterHelper, ConverterHelper>();
-
+            services.AddScoped<IMatchHelper, MatchHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -22,15 +22,17 @@ namespace soccer.Data.Entities
         public Team Visitor { get; set; }
 
         [Display(Name = "Local")]
-        public int GoalsLocal { get; set; }
+        public int? GoalsLocal { get; set; }
 
         [Display(Name = "Visita")]
-        public int GoalsVisitor { get; set; }
+        public int? GoalsVisitor { get; set; }
 
         [Display(Name = "Esta Cerrado?")]
         public bool IsClosed { get; set; }
 
         public Group Group { get; set; }
+
+        public ICollection<Prediction> Predictions { get; set; }
 
     }
 }
